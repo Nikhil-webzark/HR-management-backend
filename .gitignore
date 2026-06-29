@@ -54,3 +54,5 @@ public/uploads/
 
 # Misc
 *.tgz
+
+src/testing/
