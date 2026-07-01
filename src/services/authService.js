@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import userModel from "../models/User.js"
+import userModel from "../models/User.js";
 import AppError from "../utils/AppError.js";
 
 export const loginService = async (email,password)=>{
