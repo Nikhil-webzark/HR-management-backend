@@ -65,12 +65,12 @@ app.use("/api/status", statusRouter);
 app.use("/api/eod", eodRouter);
 app.use("/api/admin", adminRouter);
 
-// 404 handler
+// 404 handler — for routes that don't exist
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
 
-// Global error handler — must be last
+// Global error handler — must be last to catch errors from routes
 app.use(globalErrorHandler);
 
 export default app;
