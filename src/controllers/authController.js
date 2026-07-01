@@ -6,10 +6,17 @@ export const login = async (req,res,next)=>{
     const {email,password} = req.body;
     try {
         const user = await loginService(email,password);
-        delete user.password;
-        if(user) {
-            generateToken(res,user);
-            return successResponse(res,"Login successfull",user)
+        const userData = user.toObject ? user.toObject() : JSON.parse(JSON.stringify(user));
+        delete userData.password;
+        
+        // Ensure role is included
+        if(!userData.role) {
+            userData.role = user.role;
+        }
+        
+        if(userData) {
+            generateToken(res,userData);
+            return successResponse(res,"Login successfull",userData)
         }
     } catch (error) {
         next(error);

@@ -16,9 +16,36 @@ const app = express();
 // Security headers
 app.use(helmet());
 
-// CORS
+// CORS - Allow multiple origins for development and production
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
 app.use(cors({
-  origin: "https://hr-management-frontend-iota.vercel.app",
+  origin: (origin, callback) => {
+    // Allow if no origin (like mobile apps or curl requests)
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    // Allow localhost for development
+    if (origin.includes("localhost")) {
+      return callback(null, true);
+    }
+    
+    // Allow any Vercel deployment
+    if (origin.includes("vercel.app")) {
+      return callback(null, true);
+    }
+    
+    // Allow explicitly configured origins
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
 }));
 
