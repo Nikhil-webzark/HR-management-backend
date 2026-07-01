@@ -1,4 +1,4 @@
-import EODModel from "../models/EOD.js";
+import EODModel from "../models/Eod.js";
 import UserModel from "../models/User.js";
 import AppError from "../utils/AppError.js";
 
