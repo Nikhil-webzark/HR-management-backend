@@ -23,10 +23,16 @@ export const login = async (req,res,next)=>{
     }
     
 }
-export const logout = (req,res)=>{
-    res.clearCookie("token");
-    return successResponse(res,"Logged out successfully");
-}
+export const logout = (req, res) => {
+    res.clearCookie("token", {
+        path: "/",                 
+        secure: true,              
+        sameSite: "none",          
+        httpOnly: true,            
+    });
+
+    return successResponse(res, "Logged out successfully");
+};
 
 export const getMe = async(req,res)=>{
     return successResponse(res, "User fetched successfully", req.user);
