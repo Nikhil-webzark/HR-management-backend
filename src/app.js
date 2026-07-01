@@ -18,7 +18,7 @@ app.use(helmet());
 
 // CORS
 app.use(cors({
-  origin: "https://hr-management-frontend-iota.vercel.app/",
+  origin: "https://hr-management-frontend-iota.vercel.app",
   credentials: true,
 }));
 
